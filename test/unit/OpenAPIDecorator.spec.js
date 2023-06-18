@@ -9,7 +9,7 @@ const OpenAPIDecorator = require("../../src/OpenAPIDecorator");
 describe(`OpenAPIDecorator`, function () {
   describe(`documentationPart`, function () {
     it(`attaches a x-amazon-apigateway-documentation to an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -19,7 +19,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates an API Location Part for an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -42,7 +42,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates RESOURCE location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -61,15 +61,10 @@ describe(`OpenAPIDecorator`, function () {
       });
 
       expect(APIPart).lengthOf(3);
-      //   console.log(
-      //     openAPIDecorator.openAPI["x-amazon-apigateway-documentation"]
-      //       .documentationParts
-      //   );
-      // expect(APIPart[0].properties).to.be.eql(openAPIDoc.info);
     });
 
     it(`generates METHOD location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -91,7 +86,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates PATH_PARAMETER location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -113,7 +108,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates QUERY_PARAMETER location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -135,7 +130,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates REQUEST_HEADER location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -157,7 +152,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates REQUEST_BODY location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
@@ -179,7 +174,7 @@ describe(`OpenAPIDecorator`, function () {
     });
 
     it(`generates RESPONSE location part for each resource on an openAPI document`, function () {
-      const openAPIDoc = structuredClone(validOpenAPI);
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
       const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
       openAPIDecorator.decorate();
 
