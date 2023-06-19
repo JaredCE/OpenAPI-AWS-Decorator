@@ -1,0 +1,35 @@
+{
+  "name": "openapi-aws-decorator",
+  "version": "0.0.1",
+  "description": "This decorates OpenAPI 3.0.X files with AWS APIGateway OpenAPI tags: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api-content-representation.html ",
+  "main": "index.js",
+  "keywords": [
+    "OpenAPI 3",
+    "OpenAPI v3",
+    "OpenAPI",
+    "AWS",
+    "AWS APIGateway",
+    "AWS API Gateway"
+  ],
+  "scripts": {
+    "test": "mocha --config './test/.mocharc.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JaredCE/OpenAPI-AWS-Decorator.git"
+  },
+  "author": "JaredCE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JaredCE/OpenAPI-AWS-Decorator/issues"
+  },
+  "homepage": "https://github.com/JaredCE/OpenAPI-AWS-Decorator#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "sinon": "^15.1.2"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
