@@ -4,9 +4,12 @@
   "description": "This decorates OpenAPI 3.0.X files with AWS APIGateway OpenAPI tags: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api-content-representation.html ",
   "main": "index.js",
   "keywords": [
+    "OpenAPI 3",
+    "OpenAPI v3",
     "OpenAPI",
     "AWS",
-    "AWS APIGateway"
+    "AWS APIGateway",
+    "AWS API Gateway"
   ],
   "scripts": {
     "test": "mocha --config './test/.mocharc.js'"
