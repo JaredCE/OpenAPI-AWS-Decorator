@@ -3,6 +3,8 @@
 class DocumentationParts {
   constructor(openAPI) {
     this.openAPI = openAPI;
+    this.newModelNames = {};
+    this.oldModelNames = {};
   }
 
   parse() {
@@ -10,9 +12,12 @@ class DocumentationParts {
     const apiPart = this.__createAPIPart();
     parts.push(apiPart);
 
+    const modelParts = this.__manipulateModels();
+    parts = parts.concat(modelParts);
+
     const resourceParts = this.__createPathParts();
     parts = parts.concat(resourceParts);
-    // parts = [...resourceParts, ...apiPart];
+
     return parts;
   }
 
@@ -23,7 +28,7 @@ class DocumentationParts {
         type: "API",
       },
       properties: {
-        ...info,
+        info,
       },
     };
     return part;
@@ -66,8 +71,13 @@ class DocumentationParts {
     for (const method of Object.keys(this.pathValue)) {
       const description = this.pathValue[method]?.description;
       const summary = this.pathValue[method]?.summary;
+
       parts.push({
-        location: { type: "METHOD", path: this.pathName, method: method },
+        location: {
+          type: "METHOD",
+          path: this.pathName,
+          method: method,
+        },
         properties: {
           ...(description && { description: description }),
           ...(summary && { summary: summary }),
@@ -159,6 +169,44 @@ class DocumentationParts {
     }
 
     return parts;
+  }
+
+  __manipulateModels() {
+    const parts = [];
+    if (this.openAPI?.components?.schemas) {
+      for (const [key, model] of Object.entries(
+        this.openAPI.components.schemas
+      )) {
+        const newKey = key.replace(/[\W_]+/g, "");
+        Object.assign(this.oldModelNames, { [key]: newKey });
+        Object.assign(this.newModelNames, { [newKey]: key });
+
+        Object.assign(this.openAPI.components.schemas, {
+          [newKey]: this.openAPI.components.schemas[key],
+        });
+
+        if (newKey !== key) delete this.openAPI.components.schemas[key];
+
+        const part = this.__createMODELPart(model, newKey);
+
+        parts.push(part);
+      }
+    }
+
+    return parts;
+  }
+
+  __createMODELPart(model, key) {
+    const part = {
+      location: {
+        type: "MODEL",
+        name: key,
+      },
+      properties: {
+        schema: model,
+      },
+    };
+    return part;
   }
 }
 

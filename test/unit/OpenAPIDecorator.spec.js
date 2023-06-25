@@ -38,7 +38,7 @@ describe(`OpenAPIDecorator`, function () {
       });
 
       expect(APIPart).lengthOf(1);
-      expect(APIPart[0].properties).to.be.eql(openAPIDoc.info);
+      expect(APIPart[0].properties.info).to.be.eql(openAPIDoc.info);
     });
 
     it(`generates RESOURCE location part for each resource on an openAPI document`, function () {
@@ -193,6 +193,28 @@ describe(`OpenAPIDecorator`, function () {
       });
 
       expect(APIPart).lengthOf(5);
+    });
+
+    it(`generates MODEL location part for each component schema on an openAPI document`, function () {
+      const openAPIDoc = JSON.parse(JSON.stringify(validOpenAPI));
+      const openAPIDecorator = new OpenAPIDecorator(openAPIDoc);
+      openAPIDecorator.decorate();
+
+      expect(openAPIDecorator.openAPI).to.have.property(
+        "x-amazon-apigateway-documentation"
+      );
+
+      expect(
+        openAPIDecorator.openAPI["x-amazon-apigateway-documentation"]
+      ).to.have.property("documentationParts");
+
+      const APIPart = openAPIDecorator.openAPI[
+        "x-amazon-apigateway-documentation"
+      ].documentationParts.filter((part) => {
+        if (part.location.type === "MODEL") return part;
+      });
+
+      expect(APIPart).lengthOf(1);
     });
   });
 });
