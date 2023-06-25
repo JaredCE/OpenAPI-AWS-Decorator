@@ -127,3 +127,11 @@ This will end up with the original OpenAPI document containing a new property se
   }
 }
 ```
+
+You can then use the AWS CLI v2 command to upload the documentation parts:
+
+```bash
+aws apigateway import-documentation-parts --rest-api-id your-rest-api-id --body fileb://openAPI.json
+```
+
+This asusmes that you have saved the augmented OpenAPI to a file called **openAPI.json** and that you know your rest-api-id.
